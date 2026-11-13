@@ -87,16 +87,19 @@ export async function evaluateWithServReasoning(params: {
 
   const precheck = scanPromptInjectionPrecheck(textCorpus);
 
+  const model = config.servModel || SERV_DEFAULT_MODEL;
+  const endpoint = config.servBaseUrl || SERV_REASONING_BASE_URL;
+
   // If prompt injection is flagged during deterministic precheck -> quarantine immediately
   if (precheck.flagged) {
     return {
       mode: "prompt_guard_quarantined",
-      endpoint: config.servBaseUrl,
-      model: config.servModel,
+      endpoint,
+      model,
       systemPromptVersion: SERV_SYSTEM_PROMPT_VERSION,
       servToolsDeclared: ["serv_prompt_guard", "serv_shadow_agent"],
       kronosEnabled: false,
-      multipathEnabled: config.servModel.includes("-serv-multipath"),
+      multipathEnabled: model.includes("-serv-multipath"),
       precheckInjection: precheck,
       rawProposal: {
         proposedAction: "REJECT_RISK",
@@ -131,12 +134,12 @@ export async function evaluateWithServReasoning(params: {
 
     return {
       mode: "rogue_model_simulation",
-      endpoint: config.servBaseUrl,
-      model: config.servModel,
+      endpoint,
+      model,
       systemPromptVersion: SERV_SYSTEM_PROMPT_VERSION,
       servToolsDeclared: ["serv_prompt_guard", "serv_shadow_agent"],
       kronosEnabled: false,
-      multipathEnabled: config.servModel.includes("-serv-multipath"),
+      multipathEnabled: model.includes("-serv-multipath"),
       precheckInjection: precheck,
       rawProposal: simulatedProposal,
       clampedBudgetMultiplier: clampedMultiplier,
@@ -287,14 +290,17 @@ function createFallbackTrace(
     explanation: reason,
   };
 
+  const endpoint = config.servBaseUrl || SERV_REASONING_BASE_URL;
+  const model = config.servModel || SERV_DEFAULT_MODEL;
+
   return {
     mode: "deterministic_fallback",
-    endpoint: config.servBaseUrl,
-    model: config.servModel,
+    endpoint,
+    model,
     systemPromptVersion: SERV_SYSTEM_PROMPT_VERSION,
     servToolsDeclared: ["serv_prompt_guard", "serv_shadow_agent"],
     kronosEnabled: false,
-    multipathEnabled: config.servModel.includes("-serv-multipath"),
+    multipathEnabled: model.includes("-serv-multipath"),
     precheckInjection: precheck,
     rawProposal: fallbackProposal,
     clampedBudgetMultiplier: 1.0,
