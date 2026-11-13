@@ -1,0 +1,46 @@
+{
+  "name": "openserv-kite-x402-sentinel",
+  "version": "1.0.0",
+  "description": "Autonomous Kite Agent Passport & x402 v2 DeFi Payment Firewall powered by OpenServ Agent SDK and SERV Reasoning (serv_prompt_guard + serv_shadow_agent + multipath)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "tsx src/cli.ts serve",
+    "dev": "tsx watch src/cli.ts serve",
+    "demo": "tsx src/cli.ts demo",
+    "agent": "tsx src/cli.ts agent",
+    "verify-serv": "tsx src/cli.ts verify-serv",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "openserv",
+    "serv-reasoning",
+    "kite-ai",
+    "kite-passport",
+    "kite-x402",
+    "x402",
+    "defi-firewall",
+    "mcp",
+    "eip-3009",
+    "eip-712"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@openserv-labs/sdk": "^2.4.1",
+    "openai": "^5.0.1",
+    "viem": "^2.45.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}

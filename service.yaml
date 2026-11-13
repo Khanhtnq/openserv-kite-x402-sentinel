@@ -1,0 +1,72 @@
+schema: 1
+name: openserv-kite-sentinel
+display_name: OpenServ Kite x402 Payment Sentinel
+description: >-
+  Dual-authority autonomous payment firewall for Kite Agent Passport and x402 v2.
+  Combines SERV Reasoning (serv_prompt_guard, serv_shadow_agent, multipath) with
+  deterministic endpoint scoping, BigInt spend caps, and live EVM eth_call preflight.
+maintainer:
+  github: openserv-kite-sentinel
+status: draft
+network: eip155:2366
+pay_to: "0xcbEDbeCC127a32217075Ff40f16Ec804aa1E0533"
+upstream:
+  name: OpenServ SERV Reasoning & Kite RPC
+  url: https://inference-api.openserv.ai
+  requires_api_key: false
+  terms_url: https://docs.openserv.ai
+source: custom
+endpoints:
+  - method: POST
+    path: /v1/sentinel/audit
+    summary: Evaluate a Kite Passport x402 payment intent with SERV Reasoning Prompt Guard, Shadow Agent, and deterministic spend/endpoint enforcement.
+    price_usd: "0.001"
+    example_request:
+      body:
+        merchantUrl: "https://api.weather-kite.example/v1/forecast?city=tokyo"
+        method: "GET"
+        advertisedPriceUsd: "0.005"
+        challenge402:
+          x402Version: 2
+          accepts:
+            - scheme: "exact"
+              network: "eip155:2366"
+              asset: "0x7aB6f3ed87C42eF0aDb67Ed95090f8bF5240149e"
+              amount: "5000"
+              payTo: "0xcbEDbeCC127a32217075Ff40f16Ec804aa1E0533"
+              maxTimeoutSeconds: 60
+              extra:
+                name: "Bridged USDC (Kite AI)"
+                version: "2"
+    pitfalls:
+      - "merchantUrl must use https:// and must not target private/loopback IP ranges"
+      - "challenge402.accepts must contain at least one exact-scheme entry on a supported network"
+  - method: POST
+    path: /v1/sentinel/simulate-tx
+    summary: Pre-sign EVM calldata, EIP-7702 delegation, and live Kite/Base RPC eth_call firewall simulation.
+    price_usd: "0.001"
+    example_request:
+      body:
+        chainId: 2366
+        from: "0x1111111111111111111111111111111111111111"
+        to: "0x7aB6f3ed87C42eF0aDb67Ed95090f8bF5240149e"
+        data: "0x70a08231000000000000000000000000cbEDbeCC127a32217075Ff40f16Ec804aa1E0533"
+        value: "0x0"
+    pitfalls:
+      - "chainId must be 2366 (Kite Mainnet), 2368 (Kite Testnet), or 8453 (Base Mainnet)"
+  - method: POST
+    path: /v1/sentinel/delegation-compile
+    summary: Compile and validate a strict Kite Agent Passport session delegation JSON with shell-safe kpass CLI commands.
+    price_usd: "0.001"
+    example_request:
+      body:
+        taskSummary: "Query weather forecast API on Kite mainnet within approved budget."
+        merchantUrl: "https://api.weather-kite.example/v1/forecast"
+        method: "GET"
+        preflightPriceUsd: "0.005"
+        estimatedRequests: 10
+        ttlSeconds: 3600
+    pitfalls:
+      - "taskSummary must be non-empty and under 120 characters"
+categories: [ai, finance]
+tags: [openserv, serv-reasoning, kite-passport, x402, firewall, security]
