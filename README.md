@@ -3,6 +3,11 @@
 > **Dual-Authority Autonomous Payment Firewall & x402 v2 Settlement Gateway**  
 > Powered by **OpenServ Agent SDK (`@openserv-labs/sdk`)**, **SERV Reasoning (`serv_prompt_guard` + `serv_shadow_agent` + `-serv-multipath`)**, and **Deterministic Kite Agent Passport Session Mandates** across **Kite Mainnet (`2366`)**, **Kite Testnet (`2368`)**, and **Base Mainnet (`8453`)**.
 
+[![Live Demo Playground](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://khanhtnq.github.io/openserv-kite-x402-sentinel/)
+[![Tests](https://img.shields.io/badge/Vitest-38%2F38%20Passing-emerald?style=for-the-badge&logo=vitest)](https://github.com/Khanhtnq/openserv-kite-x402-sentinel)
+[![OpenServ](https://img.shields.io/badge/OpenServ-Edition%2002%20Kite%20Track-orange?style=for-the-badge)](https://www.openserv.ai/hackathon-2)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Worker%20Ready-f38020?style=for-the-badge&logo=cloudflare)](https://github.com/Khanhtnq/openserv-kite-x402-sentinel)
+
 ---
 
 ## 1. System Architecture
@@ -55,6 +60,8 @@ flowchart TD
     SettlementLayer --> BaseMain
 ```
 
+An architectural SVG diagram is available in [`docs/architecture.svg`](docs/architecture.svg).
+
 ---
 
 ## 2. Core Invariants & Security Guarantees
@@ -80,7 +87,21 @@ flowchart TD
 
 ---
 
-## 3. Quickstart & Installation
+## 3. Deployment & Runtime Modes
+
+Sentinel is designed for flexibility across different agent environments:
+
+| Mode | Command / Path | Description |
+|:---|:---|:---|
+| **Interactive Live Demo** | [`https://khanhtnq.github.io/openserv-kite-x402-sentinel/`](https://khanhtnq.github.io/openserv-kite-x402-sentinel/) | Zero-install interactive browser playground executing client-side simulations of prompt-injection defense, rogue model clamping, and EVM calldata audits. |
+| **OpenServ Agent SDK** | `npm run agent` | Runs as an autonomous agent on OpenServ network via `@openserv-labs/sdk` registering `audit_kite_x402_payment`, `simulate_evm_firewall`, and `compile_kite_delegation` capabilities. |
+| **Node.js Gateway / Server** | `npm start` | Production HTTP server with interactive web workbench, `GET /.well-known/x402`, and `POST /v1/sentinel/audit`. |
+| **Terminal CLI Demo** | `npm run demo` | Verifies all 5 core security scenarios in the terminal with zero network dependencies. |
+| **Stateless Edge Worker** | `src/worker.ts` / `wrangler.toml` | Low-latency Cloudflare Worker deployable directly to the edge for distributed AI agent clusters. |
+
+---
+
+## 4. Quickstart & Installation
 
 ### Prerequisites
 - Node.js `>= 20.0.0`
@@ -94,7 +115,7 @@ cd openserv-kite-x402-sentinel
 # Install dependencies
 npm install
 
-# Run the complete test suite
+# Run the complete test suite (38 unit + integration + adversarial tests)
 npm test
 
 # Run TypeScript compilation check
@@ -106,7 +127,7 @@ npm run demo
 
 ---
 
-## 4. Configuration & Environment Variables
+## 5. Configuration & Environment Variables
 
 Copy `.env.example` to `.env` and configure your keys:
 
@@ -126,7 +147,7 @@ cp .env.example .env
 
 ---
 
-## 5. HTTP & OpenServ Agent Integration
+## 6. HTTP & OpenServ Agent Integration
 
 ### Running the HTTP Settlement Gateway
 ```bash

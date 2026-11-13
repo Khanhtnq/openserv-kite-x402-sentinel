@@ -1,0 +1,9 @@
+name = "openserv-kite-x402-sentinel"
+main = "src/worker.ts"
+compatibility_date = "2026-03-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+KITE_NETWORK = "mainnet"
+PRICE_USD = "0.001"
+ALLOW_LOCALHOST = "false"

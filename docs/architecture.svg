@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0d1527"/>
+    </linearGradient>
+    <linearGradient id="boxGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="600" rx="16" fill="url(#bgGrad)" stroke="#1f2937" stroke-width="2"/>
+
+  <!-- Header -->
+  <g transform="translate(40, 45)">
+    <rect x="0" y="0" width="40" height="40" rx="8" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5"/>
+    <path d="M12 20 L20 12 L28 20 L20 28 Z" fill="#38bdf8" opacity="0.9"/>
+    <circle cx="20" cy="20" r="3" fill="#ffffff"/>
+    <text x="54" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#f3f4f6">OpenServ Kite x402 Sentinel</text>
+    <text x="54" y="39" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#9ca3af">Dual-Authority Autonomous Payment Firewall Architecture (Edition 02)</text>
+    <rect x="740" y="5" width="180" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <text x="752" y="23" font-family="monospace" font-size="11" fill="#38bdf8">x402 v2 • kpass • EIP-7702</text>
+  </g>
+
+  <!-- Left: Client & Ingress Intent -->
+  <g transform="translate(40, 110)">
+    <rect width="260" height="440" rx="12" fill="url(#boxGrad1)" stroke="#334155" stroke-width="1.5"/>
+    <rect x="16" y="16" width="228" height="32" rx="6" fill="#0f172a" stroke="#1e293b"/>
+    <text x="28" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#38bdf8">1. BUYER PAYMENT INTENT</text>
+
+    <!-- Sub-elements -->
+    <g transform="translate(16, 64)">
+      <rect width="228" height="72" rx="8" fill="#090d16" stroke="#1f2937"/>
+      <text x="14" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#f3f4f6">Autonomous AI Agent</text>
+      <text x="14" y="40" font-family="monospace" font-size="10" fill="#9ca3af">Kite Passport Delegation</text>
+      <text x="14" y="56" font-family="monospace" font-size="10" fill="#a5f3fc">• Scoped URL &amp; Method</text>
+    </g>
+
+    <g transform="translate(16, 150)">
+      <rect width="228" height="96" rx="8" fill="#090d16" stroke="#1f2937"/>
+      <text x="14" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#f59e0b">x402 v2 Challenge</text>
+      <text x="14" y="40" font-family="monospace" font-size="10" fill="#9ca3af">• HTTP 402 Payment Required</text>
+      <text x="14" y="56" font-family="monospace" font-size="10" fill="#9ca3af">• exact scheme • USDC.e / pieUSD</text>
+      <text x="14" y="72" font-family="monospace" font-size="10" fill="#9ca3af">• Untrusted Merchant Memo</text>
+      <text x="14" y="88" font-family="monospace" font-size="10" fill="#ef4444">• Injection Vector Zone</text>
+    </g>
+
+    <g transform="translate(16, 260)">
+      <rect width="228" height="80" rx="8" fill="#090d16" stroke="#1f2937"/>
+      <text x="14" y="22" font-family="monospace" font-size="11" font-weight="600" fill="#818cf8">Pre-Sign EVM Payload</text>
+      <text x="14" y="40" font-family="monospace" font-size="10" fill="#9ca3af">• Calldata (approve/transfer)</text>
+      <text x="14" y="56" font-family="monospace" font-size="10" fill="#9ca3af">• EIP-7702 authList[]</text>
+      <text x="14" y="72" font-family="monospace" font-size="10" fill="#9ca3af">• EIP-712 Typed Data</text>
+    </g>
+
+    <g transform="translate(16, 354)">
+      <rect width="228" height="70" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="3,3"/>
+      <text x="14" y="24" font-family="monospace" font-size="11" font-weight="600" fill="#38bdf8">Ingress Sanitizer</text>
+      <text x="14" y="42" font-family="monospace" font-size="10" fill="#9ca3af">SSRF / RFC1918 / CGNAT</text>
+      <text x="14" y="58" font-family="monospace" font-size="10" fill="#10b981">Zero-Width Steg Stripper</text>
+    </g>
+  </g>
+
+  <!-- Middle: Dual-Authority Core -->
+  <g transform="translate(340, 110)">
+    <rect width="320" height="440" rx="12" fill="url(#boxGrad1)" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="16" y="16" width="288" height="32" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="28" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#38bdf8">2. DUAL-AUTHORITY SENTINEL</text>
+
+    <!-- Authority A: Code-Enforced Deterministic Rules -->
+    <g transform="translate(16, 60)">
+      <rect width="288" height="150" rx="8" fill="#090d16" stroke="#10b981" stroke-width="1.5"/>
+      <rect x="12" y="10" width="130" height="20" rx="4" fill="#10b981" fill-opacity="0.2"/>
+      <text x="18" y="24" font-family="monospace" font-size="10" font-weight="700" fill="#10b981">AUTHORITY A: CODE</text>
+      <text x="14" y="48" font-family="monospace" font-size="10" fill="#f3f4f6">• Ceiling Rounding (BigInt micros)</text>
+      <text x="14" y="66" font-family="monospace" font-size="10" fill="#f3f4f6">• Max Per-Tx &amp; Daily Cap Enforcer</text>
+      <text x="14" y="84" font-family="monospace" font-size="10" fill="#f3f4f6">• EIP-7702 EOA Hijack Block (Score 100)</text>
+      <text x="14" y="102" font-family="monospace" font-size="10" fill="#f3f4f6">• Pre-settlement Network/Asset Pinning</text>
+      <text x="14" y="120" font-family="monospace" font-size="10" fill="#f3f4f6">• Idempotency &amp; Replay Protection</text>
+      <text x="14" y="138" font-family="monospace" font-size="10" fill="#f3f4f6">• EIP-3009 / Permit2 Receiver Match</text>
+    </g>
+
+    <!-- Authority B: OpenServ SERV Multipath Reasoning -->
+    <g transform="translate(16, 222)">
+      <rect width="288" height="150" rx="8" fill="#090d16" stroke="#818cf8" stroke-width="1.5"/>
+      <rect x="12" y="10" width="140" height="20" rx="4" fill="#818cf8" fill-opacity="0.2"/>
+      <text x="18" y="24" font-family="monospace" font-size="10" font-weight="700" fill="#818cf8">AUTHORITY B: SERV</text>
+      <text x="14" y="48" font-family="monospace" font-size="10" fill="#f3f4f6">• gpt-5.4-mini-serv-multipath</text>
+      <text x="14" y="66" font-family="monospace" font-size="10" fill="#f3f4f6">• serv_prompt_guard Tool</text>
+      <text x="14" y="84" font-family="monospace" font-size="10" fill="#f3f4f6">• serv_shadow_agent Tool</text>
+      <text x="14" y="102" font-family="monospace" font-size="10" fill="#f3f4f6">• Value &amp; Utility Scoring [0-100]</text>
+      <text x="14" y="120" font-family="monospace" font-size="10" fill="#f3f4f6">• Strict JSON Proposal Schema</text>
+      <text x="14" y="138" font-family="monospace" font-size="10" fill="#ef4444">• ROGUE CLAMP: Multiplier in [0, 1]</text>
+    </g>
+
+    <!-- Synthesis Gate -->
+    <g transform="translate(16, 384)">
+      <rect width="288" height="44" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+      <text x="14" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#38bdf8">INVARIANT SYNTHESIS ENGINE</text>
+      <text x="14" y="34" font-family="monospace" font-size="9" fill="#9ca3af">Code ALWAYS overrides LLM APPROVE on violation!</text>
+    </g>
+  </g>
+
+  <!-- Right: Settlement & Outputs -->
+  <g transform="translate(700, 110)">
+    <rect width="260" height="440" rx="12" fill="url(#boxGrad1)" stroke="#334155" stroke-width="1.5"/>
+    <rect x="16" y="16" width="228" height="32" rx="6" fill="#0f172a" stroke="#1e293b"/>
+    <text x="28" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#10b981">3. VERDICT &amp; SETTLEMENT</text>
+
+    <!-- 4 Possible Verdicts -->
+    <g transform="translate(16, 64)">
+      <rect width="228" height="36" rx="6" fill="#090d16" stroke="#10b981"/>
+      <circle cx="20" cy="18" r="5" fill="#10b981"/>
+      <text x="34" y="22" font-family="monospace" font-size="10" font-weight="700" fill="#10b981">APPROVED</text>
+      <text x="110" y="22" font-family="monospace" font-size="9" fill="#9ca3af">Signs payment</text>
+    </g>
+
+    <g transform="translate(16, 110)">
+      <rect width="228" height="36" rx="6" fill="#090d16" stroke="#f59e0b"/>
+      <circle cx="20" cy="18" r="5" fill="#f59e0b"/>
+      <text x="34" y="22" font-family="monospace" font-size="10" font-weight="700" fill="#f59e0b">HELD_FOR_HUMAN</text>
+      <text x="150" y="22" font-family="monospace" font-size="9" fill="#9ca3af">&gt; threshold</text>
+    </g>
+
+    <g transform="translate(16, 156)">
+      <rect width="228" height="36" rx="6" fill="#090d16" stroke="#ef4444"/>
+      <circle cx="20" cy="18" r="5" fill="#ef4444"/>
+      <text x="34" y="22" font-family="monospace" font-size="10" font-weight="700" fill="#ef4444">BLOCKED_INJECTION</text>
+      <text x="170" y="22" font-family="monospace" font-size="9" fill="#9ca3af">Quarantine</text>
+    </g>
+
+    <g transform="translate(16, 202)">
+      <rect width="228" height="36" rx="6" fill="#090d16" stroke="#dc2626"/>
+      <circle cx="20" cy="18" r="5" fill="#dc2626"/>
+      <text x="34" y="22" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">BLOCKED_POLICY</text>
+      <text x="160" y="22" font-family="monospace" font-size="9" fill="#9ca3af">Hard limit</text>
+    </g>
+
+    <!-- Multi-Network Settlement Rails -->
+    <g transform="translate(16, 254)">
+      <rect width="228" height="96" rx="8" fill="#090d16" stroke="#1f2937"/>
+      <text x="14" y="20" font-family="monospace" font-size="10" font-weight="700" fill="#38bdf8">SETTLEMENT RAILS</text>
+      <text x="14" y="38" font-family="monospace" font-size="9.5" fill="#f3f4f6">• Kite Mainnet (2366, USDC.e)</text>
+      <text x="14" y="56" font-family="monospace" font-size="9.5" fill="#f3f4f6">• Kite Testnet (2368, pieUSD)</text>
+      <text x="14" y="74" font-family="monospace" font-size="9.5" fill="#f3f4f6">• Base Mainnet (8453, USDC)</text>
+      <text x="14" y="90" font-family="monospace" font-size="9" fill="#9ca3af">Canonical: 0xcbEDbe...1E0533</text>
+    </g>
+
+    <!-- Audit Ledger & Digest -->
+    <g transform="translate(16, 362)">
+      <rect width="228" height="62" rx="8" fill="#0f172a" stroke="#10b981" stroke-dasharray="2,2"/>
+      <text x="14" y="20" font-family="monospace" font-size="10" font-weight="700" fill="#10b981">AUDIT LEDGER &amp; DIGEST</text>
+      <text x="14" y="38" font-family="monospace" font-size="9" fill="#9ca3af">Immutable SHA-256 Receipt</text>
+      <text x="14" y="52" font-family="monospace" font-size="9" fill="#a5f3fc">Separate Rule &amp; SERV fields</text>
+    </g>
+  </g>
+
+  <!-- Connective Arrows -->
+  <g stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.8">
+    <path d="M300 330 L340 330" marker-end="url(#arrow)" />
+    <path d="M660 330 L700 330" marker-end="url(#arrow)" />
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+</svg>
