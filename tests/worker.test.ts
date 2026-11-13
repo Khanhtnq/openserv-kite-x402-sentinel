@@ -245,4 +245,35 @@ describe("OpenServ Kite x402 Sentinel — Cloudflare Edge Worker Suite", () => {
     const json = (await res.json()) as any;
     expect(json.error).toBe("NOT_FOUND");
   });
+
+  it("14. POST /v1/audit/evaluate enforces UTF-8 byte cap without Content-Length header", async () => {
+    // 20,000 4-byte emojis = 40,000 UTF-16 code units (< 65536) yet 80,000 UTF-8 bytes (> 65536)
+    const multibyteNote = "🛡️".repeat(15000);
+    const req = new Request("https://sentinel.local/v1/audit/evaluate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ merchantUntrustedNote: multibyteNote }),
+    });
+    const res = await worker.fetch(req, env);
+    expect(res.status).toBe(413);
+    const json = (await res.json()) as any;
+    expect(json.error).toBe("PAYLOAD_TOO_LARGE");
+  });
+
+  it("15. POST /v1/audit/paid respects KITE_NETWORK=testnet and custom PRICE_USD", async () => {
+    const req = new Request("https://sentinel.local/v1/audit/paid", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "inspect" }),
+    });
+    const res = await worker.fetch(req, {
+      KITE_NETWORK: "testnet",
+      PRICE_USD: "0.005",
+    });
+    expect(res.status).toBe(402);
+    const json = (await res.json()) as any;
+    expect(json.accepts[0].network).toBe(SETTLEMENT_NETWORKS["kite-testnet"].network);
+    expect(json.accepts[0].asset).toBe(SETTLEMENT_NETWORKS["kite-testnet"].asset);
+    expect(json.accepts[0].amount).toBe("5000000000000000");
+  });
 });

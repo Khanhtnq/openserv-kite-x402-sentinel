@@ -4,7 +4,7 @@
 > Powered by **OpenServ Agent SDK (`@openserv-labs/sdk`)**, **SERV Reasoning (`serv_prompt_guard` + `serv_shadow_agent` + `-serv-multipath`)**, and **Deterministic Kite Agent Passport Session Mandates** across **Kite Mainnet (`2366`)**, **Kite Testnet (`2368`)**, and **Base Mainnet (`8453`)**.
 
 [![Live Demo Playground](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://khanhtnq.github.io/openserv-kite-x402-sentinel/)
-[![Tests](https://img.shields.io/badge/Vitest-38%2F38%20Passing-emerald?style=for-the-badge&logo=vitest)](https://github.com/Khanhtnq/openserv-kite-x402-sentinel)
+[![Tests](https://img.shields.io/badge/Vitest-53%2F53%20Passing-emerald?style=for-the-badge&logo=vitest)](https://github.com/Khanhtnq/openserv-kite-x402-sentinel)
 [![OpenServ](https://img.shields.io/badge/OpenServ-Edition%2002%20Kite%20Track-orange?style=for-the-badge)](https://www.openserv.ai/hackathon-2)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Worker%20Ready-f38020?style=for-the-badge&logo=cloudflare)](https://github.com/Khanhtnq/openserv-kite-x402-sentinel)
 
@@ -115,7 +115,7 @@ cd openserv-kite-x402-sentinel
 # Install dependencies
 npm install
 
-# Run the complete test suite (38 unit + integration + adversarial tests)
+# Run the complete test suite (53 unit + integration + adversarial + edge worker tests)
 npm test
 
 # Run TypeScript compilation check

@@ -5,7 +5,7 @@ import {
   SERVICE_VERSION,
   SETTLEMENT_NETWORKS,
 } from "./constants.js";
-import { compileKiteDelegation } from "./kitePassport.js";
+import { compileKiteDelegation, parseUsdToMicros } from "./kitePassport.js";
 import { simulateEvmTransaction, inspectEip712TypedData } from "./firewall.js";
 import { KitePaymentSentinel } from "./sentinel.js";
 import { BuyerPaymentIntentInput, X402ChallengePayload } from "./types.js";
@@ -394,7 +394,7 @@ export default {
         return { ok: false, status: 400, error: "FAILED_READING_BODY" };
       }
 
-      if (text.length > MAX_BODY_BYTES) {
+      if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) {
         return { ok: false, status: 413, error: "PAYLOAD_TOO_LARGE" };
       }
 
@@ -459,6 +459,15 @@ export default {
         (request.headers.get("x-sentinel-demo") === "true" ? "demo-signature-valid" : null);
 
       if (!sigHeader) {
+        const netKey =
+          sentinel.getConfig().kiteNetwork === "testnet" ? "kite-testnet" : "kite-mainnet";
+        const activeNet = SETTLEMENT_NETWORKS[netKey];
+        const priceMicros = parseUsdToMicros(sentinel.getConfig().sellerPriceUsd);
+        const atomicAmount = (
+          (priceMicros * 10n ** BigInt(activeNet.decimals)) /
+          1_000_000n
+        ).toString();
+
         const challenge: X402ChallengePayload = {
           x402Version: 2,
           error: "PAYMENT_REQUIRED",
@@ -466,14 +475,14 @@ export default {
           accepts: [
             {
               scheme: "exact",
-              network: SETTLEMENT_NETWORKS["kite-mainnet"].network,
-              asset: SETTLEMENT_NETWORKS["kite-mainnet"].asset,
-              amount: "1000", // $0.001
+              network: activeNet.network,
+              asset: activeNet.asset,
+              amount: atomicAmount,
               payTo: CANONICAL_EVM_PAY_TO,
               maxTimeoutSeconds: 60,
               extra: {
-                name: SETTLEMENT_NETWORKS["kite-mainnet"].eip712Domain.name,
-                version: SETTLEMENT_NETWORKS["kite-mainnet"].eip712Domain.version,
+                name: activeNet.eip712Domain.name,
+                version: activeNet.eip712Domain.version,
               },
             },
           ],
